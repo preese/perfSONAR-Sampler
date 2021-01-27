@@ -1,0 +1,62 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+    config.vm.define "vm1" do |config|
+	  config.vm.box = "centos/7"
+	  config.vm.network :public_network, :dev => "enp2s0", :mode => "bridge", :mac => "52:54:00:73:6f:41"
+      config.vm.provision "file", source: "/home/vagrant/.ssh/id_ed25519.pub", destination: "/home/vagrant/.ssh/authorized_keys2"
+	  config.vm.provision "shell", inline: "hostnamectl set-hostname --static 'vm1.ufixu.com'"
+	  config.vm.provision "shell", inline: "cat /home/vagrant/.ssh/authorized_keys2 >> /home/vagrant/.ssh/authorized_keys"
+	  config.vm.provider :libvirt do |domain|
+		  domain.memory = 2048
+		  domain.cpus = 1
+		  domain.storage_pool_name = "default"
+	  end
+	end
+
+    config.vm.define "vm2" do |config|
+	  config.vm.box = "centos/7"
+	  config.vm.network :public_network, :dev => "enp2s0", :mode => "bridge", :mac => "52:54:00:73:6f:42"
+      config.vm.provision "file", source: "/home/vagrant/.ssh/id_ed25519.pub", destination: "/home/vagrant/.ssh/authorized_keys2"
+	  config.vm.provision "shell", inline: "hostnamectl set-hostname --static 'vm2.ufixu.com'"
+	  config.vm.provision "shell", inline: "cat /home/vagrant/.ssh/authorized_keys2 >> /home/vagrant/.ssh/authorized_keys"
+	  config.vm.provider :libvirt do |domain|
+		  domain.memory = 2048
+		  domain.cpus = 1
+		  domain.storage_pool_name = "default"
+	  end
+	end
+
+    config.vm.define "vm3" do |config|
+	  config.vm.box = "centos/7"
+	  config.vm.network :public_network, :dev => "enp2s0", :mode => "bridge", :mac => "52:54:00:73:6f:43"
+      config.vm.provision "file", source: "/home/vagrant/.ssh/id_ed25519.pub", destination: "/home/vagrant/.ssh/authorized_keys2"
+	  config.vm.provision "shell", inline: "hostnamectl set-hostname --static 'vm3.ufixu.com'"
+	  config.vm.provision "shell", inline: "cat /home/vagrant/.ssh/authorized_keys2 >> /home/vagrant/.ssh/authorized_keys"
+	  config.vm.provider :libvirt do |domain|
+		  domain.memory = 2048
+		  domain.cpus = 1
+		  domain.storage_pool_name = "default"
+	  end
+	end
+
+    config.vm.define "md" do |config|
+	  config.vm.box = "centos/7"
+	  config.vm.network :public_network, :dev => "enp2s0", :mode => "bridge", :mac => "52:54:00:73:6f:44"
+      config.vm.provision "file", source: "/home/vagrant/.ssh/id_ed25519.pub", destination: "/home/vagrant/.ssh/authorized_keys2"
+	  config.vm.provision "shell", inline: "hostnamectl set-hostname --static 'md.ufixu.com'"
+	  config.vm.provision "shell", inline: "cat /home/vagrant/.ssh/authorized_keys2 >> /home/vagrant/.ssh/authorized_keys"
+	  config.vm.provider :libvirt do |domain|
+		  domain.memory = 2048
+		  domain.cpus = 1
+		  domain.storage_pool_name = "default"
+	  end
+	end
+
+#    config.vm.provision :ansible_local do |ansible|
+#      ansible.playbook = "/home/vagrant/ps-proj.yml"
+#      ansible.inventory_path = '/home/vagrant/hosts'
+#         ansible.limit = 'ps'
+#    end
+end

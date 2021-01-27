@@ -1,0 +1,116 @@
+{
+    "_meta": {
+        "display-name": "VMproj"
+    },
+
+    "archives": {
+        "Home_esmond_archive": {
+            "archiver": "esmond",
+            "data": {
+                "measurement-agent": "{% scheduled_by_address %}",
+                "url": "http://md.ufixu.com/esmond/perfsonar/archive/"
+            }
+        }
+     },
+
+    "addresses": {
+        "vm1": { "address": "vm1.ufixu.com" },
+        "vm2": { "address": "vm2.ufixu.com" },
+        "vm3": { "address": "vm3.ufixu.com" }
+    },
+
+    "groups": {
+        "Home_group_mesh": {
+            "type": "mesh",
+            "addresses": [
+                { "name": "vm1" },
+                { "name": "vm2" },
+                { "name": "vm3" }
+            ]
+         }
+     },
+    "tests": {
+        "test_throughput": {
+            "type": "throughput",
+            "spec": {
+                "source": "{% address[0] %}",
+                "dest": "{% address[1] %}",
+                "duration": "PT20S"
+            }
+        },
+        "test_rtt": {
+            "type": "rtt",
+            "spec": {
+                "source": "{% address[0] %}",
+                "dest": "{% address[1] %}",
+                "count": 10,
+                "interval": "PT1S",
+                "length": 1000
+            }
+        },
+        "test_latencybg": {
+            "type": "latencybg",
+            "spec": {
+                "source": "{% address[0] %}",
+                "dest": "{% address[1] %}",
+                "flip": "{% flip %}"
+            }
+        },
+        "test_trace": {
+            "type": "trace",
+            "spec": {
+                "source": "{% address[0] %}",
+                "dest": "{% address[1] %}"
+            }
+        }
+    },
+    "schedules": {
+        "Home_schedule_PT2H": {
+            "repeat": "PT2H",
+            "sliprand": true,
+            "slip": "PT2H"
+        },
+        "Home_schedule_PT10M": {
+            "repeat": "PT10M",
+            "sliprand": true,
+            "slip": "PT10M"
+        }
+    },
+    "tasks": {
+        "task_throughput": {
+            "group": "Home_group_mesh",
+            "test": "test_throughput",
+            "schedule": "Home_schedule_PT2H",
+            "archives": [ "Home_esmond_archive" ],
+            "_meta": {
+                "display-name": "All to All-3"
+            }
+        },
+        "task_rtt": {
+            "group": "Home_group_mesh",
+            "test": "test_rtt",
+            "schedule": "Home_schedule_PT10M",
+            "archives": [ "Home_esmond_archive" ],
+            "_meta": {
+                "display-name": "All to All-2"
+            }
+        },
+        "task_latencybg": {
+            "group": "Home_group_mesh",
+            "test": "test_latencybg",
+            "archives": [ "Home_esmond_archive" ],
+            "_meta": {
+                "display-name": "All to All-1"
+            }
+        },
+        "task_trace": {
+            "group": "Home_group_mesh",
+            "test": "test_trace",
+            "schedule": "Home_schedule_PT10M",
+            "archives": [ "Home_esmond_archive" ],
+            "_meta": {
+                "display-name": "All to All-4"
+            }
+        }
+     }
+  }
