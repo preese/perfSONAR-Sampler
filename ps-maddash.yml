@@ -54,8 +54,8 @@
     - name: add correct grid name
       ansible.builtin.replace:
         path: /etc/maddash/maddash-webui/config.json
-        regexp: '"My Sites",$'
-        replace: '\1"VMproj",\2'
+        regexp: '"My Sites"'
+        replace: '"VMproj"'
 
     - name: enable cassandra
       service:
