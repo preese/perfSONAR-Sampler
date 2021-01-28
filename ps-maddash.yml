@@ -51,6 +51,12 @@
     - name: add esmond access for local net
       command:  "/usr/sbin/esmond_manage add_user_ip_address example-user1 192.168.1.0/24"
 
+    - name: add correct grid name
+      ansible.builtin.replace:
+        path: /etc/maddash/maddash-webui/config.json
+        regexp: '"My Sites",$'
+        replace: '\1"VMproj",\2'
+
     - name: enable cassandra
       service:
         name: cassandra

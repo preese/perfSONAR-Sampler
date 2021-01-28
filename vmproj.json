@@ -8,15 +8,15 @@
             "archiver": "esmond",
             "data": {
                 "measurement-agent": "{% scheduled_by_address %}",
-                "url": "http://md.ufixu.com/esmond/perfsonar/archive/"
+                "url": "http://192.168.1.213/esmond/perfsonar/archive/"
             }
         }
      },
 
     "addresses": {
-        "vm1": { "address": "vm1.ufixu.com" },
-        "vm2": { "address": "vm2.ufixu.com" },
-        "vm3": { "address": "vm3.ufixu.com" }
+        "vm1": { "address": "192.168.1.210 },
+        "vm2": { "address": "192.168.1.211" },
+        "vm3": { "address": "192.168.1.212" }
     },
 
     "groups": {
