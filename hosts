@@ -1,12 +1,12 @@
 [ps]
-vm1
-vm2
-vm3
+vm1 ansible_host=192.168.1.210
+vm2 ansible_host=192.168.1.211
+vm3 ansible_host=192.168.1.212
 
 [mad]
-md
+md ansible_host=192.168.1.213
 
 [dj]
-dj1
-dj2
-dj3
+dj1 ansible_host=192.168.1.214
+dj2 ansible_host=192.168.1.215
+dj3 ansible_host=192.168.1.216

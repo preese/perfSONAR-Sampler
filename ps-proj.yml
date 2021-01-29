@@ -23,5 +23,5 @@
         state: present
 
     - name: install remote URL and archives
-      command: 'psconfig remote  add --configure-archives "http://md.ufixu.com/psconfig/vmproj.json"'
+      command: 'psconfig remote  add --configure-archives "http://md.ufixu.com/psconfig/ps-proj.json"'
       

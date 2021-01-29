@@ -19,10 +19,10 @@
         state: present
 
     - name: copy .json file
-      command:  "psconfig publish /vagrant/vmproj.json"
+      command:  "psconfig publish /vagrant/ps-proj.json"
 
     - name: copy psconfig remote
-      command:  'psconfig remote add "http://md.ufixu.com/psconfig/vmproj.json"'
+      command:  'psconfig remote add "http://md.ufixu.com/psconfig/ps-proj.json"'
 
     - name: start service if not running
       service:
@@ -55,7 +55,7 @@
       ansible.builtin.replace:
         path: /etc/maddash/maddash-webui/config.json
         regexp: '"My Sites"'
-        replace: '"VMproj"'
+        replace: '"1 PSproj"'
 
     - name: enable cassandra
       service:
