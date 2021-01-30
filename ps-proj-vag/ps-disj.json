@@ -1,6 +1,6 @@
 {
     "_meta": {
-        "display-name": "2 Disjoint"
+        "display-name": "2 DJ"
     },
 
     "archives": {
@@ -38,44 +38,7 @@
                ]
          }
      },
-{
-    "_meta":{
-        "display-name": "2:UIT-SUNet-DJ"
-    },
-    "archives": {
-        "SUPS_esmond_archive": {
-            "archiver": "esmond",
-            "data": {
-                "measurement-agent": "{% scheduled_by_address %}",
-                "url": "https://171.64.20.131/esmond/perfsonar/archive/"
-            }
-        }
-     },
 
-    "addresses": {
-        "rwc-j2": { "address": "sups-rwc-j2.stanford.edu" },
-        "rwc-j5": { "address": "sups-rwc-j5.stanford.edu" },
-        "rwc-fw": { "address": "sups-rwc-srtr.stanford.edu" },
-        "srn-ps": { "address": "srn-ps.stanford.edu" },
-        "srn-dj": { "address": "srn-dj.stanford.edu" },
-        "srn-dm-ps": { "address": "srn-dm-ps.stanford.edu" }
-    },
-
-    "groups": {
-         "SUPS_group_disjoint": {
-             "type": "disjoint",
-             "a-addresses": [
-                    { "name": "srn-ps" },
-                    { "name": "srn-dj" },
-                    { "name": "srn-dm-ps" }
-                ],
-              "b-addresses": [
-                    { "name": "rwc-fw" },
-                    { "name": "rwc-j2" },
-                    { "name": "rwc-j5" }
-                ]
-         }
-     },
     "tests": {
         "test_throughput": {
             "type": "throughput",
