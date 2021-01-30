@@ -1,0 +1,165 @@
+{
+    "_meta": {
+        "display-name": "2 Disjoint"
+    },
+
+    "archives": {
+        "Home_esmond_archive": {
+            "archiver": "esmond",
+            "data": {
+                "measurement-agent": "{% scheduled_by_address %}",
+                "url": "http://md.ufixu.com/esmond/perfsonar/archive/"
+            }
+        }
+     },
+
+    "addresses": {
+        "vm1": { "address": "vm1.ufixu.com" },
+        "vm2": { "address": "vm2.ufixu.com" },
+        "vm3": { "address": "vm3.ufixu.com" },
+        "dj1": { "address": "dj1.ufixu.com" },
+        "dj2": { "address": "dj2.ufixu.com" },
+        "dj3": { "address": "dj3.ufixu.com" }
+
+    },
+
+    "groups": {
+         "SUPS_group_disjoint": {
+             "type": "disjoint",
+             "a-addresses": [
+                    { "name": "dj1" },
+                    { "name": "vm1" }
+                ],
+              "b-addresses": [
+                    { "name": "vm2" },
+                    { "name": "vm3" },
+                    { "name": "dj2" },
+                    { "name": "dj3" }
+               ]
+         }
+     },
+{
+    "_meta":{
+        "display-name": "2:UIT-SUNet-DJ"
+    },
+    "archives": {
+        "SUPS_esmond_archive": {
+            "archiver": "esmond",
+            "data": {
+                "measurement-agent": "{% scheduled_by_address %}",
+                "url": "https://171.64.20.131/esmond/perfsonar/archive/"
+            }
+        }
+     },
+
+    "addresses": {
+        "rwc-j2": { "address": "sups-rwc-j2.stanford.edu" },
+        "rwc-j5": { "address": "sups-rwc-j5.stanford.edu" },
+        "rwc-fw": { "address": "sups-rwc-srtr.stanford.edu" },
+        "srn-ps": { "address": "srn-ps.stanford.edu" },
+        "srn-dj": { "address": "srn-dj.stanford.edu" },
+        "srn-dm-ps": { "address": "srn-dm-ps.stanford.edu" }
+    },
+
+    "groups": {
+         "SUPS_group_disjoint": {
+             "type": "disjoint",
+             "a-addresses": [
+                    { "name": "srn-ps" },
+                    { "name": "srn-dj" },
+                    { "name": "srn-dm-ps" }
+                ],
+              "b-addresses": [
+                    { "name": "rwc-fw" },
+                    { "name": "rwc-j2" },
+                    { "name": "rwc-j5" }
+                ]
+         }
+     },
+    "tests": {
+        "test_throughput": {
+            "type": "throughput",
+            "spec": {
+                "source": "{% address[0] %}",
+                "dest": "{% address[1] %}",
+                "duration": "PT20S"
+            }
+        },
+        "test_rtt": {
+            "type": "rtt",
+            "spec": {
+                "source": "{% address[0] %}",
+                "dest": "{% address[1] %}",
+                "count": 10,
+                "interval": "PT1S",
+                "length": 1000
+            }
+        },
+        "test_latencybg": {
+            "type": "latencybg",
+            "spec": {
+                "source": "{% address[0] %}",
+                "dest": "{% address[1] %}",
+                "flip": "{% flip %}"
+            }
+        },
+        "test_trace": {
+            "type": "trace",
+            "spec": {
+                "source": "{% address[0] %}",
+                "dest": "{% address[1] %}"
+            }
+        }
+    },
+
+    "schedules": {
+        "SUPS_schedule_PT2H": {
+            "repeat": "PT2H",
+            "sliprand": true,
+            "slip": "PT2H"
+        },
+        "SUPS_schedule_PT10M": {
+            "repeat": "PT10M",
+            "sliprand": true,
+            "slip": "PT10M"
+        }
+    },
+
+    "tasks": {
+        "task_dj_throughput": {
+            "group": "SUPS_group_disjoint",
+            "test": "test_throughput",
+            "schedule": "SUPS_schedule_PT2H",
+            "archives": [ "SUPS_esmond_archive" ],
+            "_meta": {
+                "display-name": "Disjoint-2"
+            }
+        },
+        "task_dj_rtt": {
+            "group": "SUPS_group_disjoint",
+            "test": "test_rtt",
+            "schedule": "SUPS_schedule_PT10M",
+            "archives": [ "SUPS_esmond_archive" ],
+            "_meta": {
+                "display-name": "Disjoint-3"
+            }
+        },
+        "task_dj_latencybg": {
+            "group": "SUPS_group_disjoint",
+            "test": "test_latencybg",
+            "archives": [ "SUPS_esmond_archive" ],
+            "_meta": {
+                "display-name": "Disjoint-1"
+            }
+        },
+        "task_dj_trace": {
+            "group": "SUPS_group_disjoint",
+            "test": "test_trace",
+            "schedule": "SUPS_schedule_PT10M",
+            "archives": [ "SUPS_esmond_archive" ],
+            "_meta": {
+                "display-name": "Disjoint-4"
+            }
+        }
+    }
+}
