@@ -3,17 +3,10 @@
 - hosts: all
   become: yes
   tasks:
-    - name: install EPEL an perfsonar repos
-      yum:
-        name:
-          - epel-release
-          - http://software.internet2.edu/rpms/el7/x86_64/latest/packages/perfSONAR-repo-0.10-1.noarch.rpm
-        state: present
-
-    - name: Add perfsonar rpms
-      yum:
-        name:
-          - perfsonar-testpoint
-          - chrony
-          - htop
-        state: present
+    - name: install remote URL and archives
+      command: 'psconfig remote  add --configure-archives "http://md.ufixu.com/psconfig/mesh.json"'
+     
+    - name: restart psconfig-pscheduler-agent
+      service:
+        name: psconfig-pscheduler-agent
+        state: restarted

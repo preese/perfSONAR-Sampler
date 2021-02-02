@@ -3,16 +3,18 @@
 - hosts: all
   become: yes
   tasks:
-    - name: Copy a new "sudoers" file into place, after passing validation with visudo
+    - name: copy disjoint.json file to Maddash node
       copy:
-        src: /home/vagrant/perfSONAR-Sample/ps-disj.json
-        dest: /vagrant
+        src: ../perfS-json-files/disjoint.json
+        dest: /home/vagrant/disjoint.json
+        owner: vagrant
+        group: vagrant
      
-    - name: publish .json file
-      command:  "psconfig publish /vagrant/ps-disj.json"
+    - name: publish disjoint.json file
+      command:  "psconfig publish /home/vagrant/disjoint.json"
 
-    - name: make availalbe to nodes psconfig remote
-      command:  'psconfig remote add "http://md.ufixu.com/psconfig/ps-disj.json"'
+    - name: make availalbe to nodes
+      command:  'psconfig remote add "http://md.ufixu.com/psconfig/disjoint.json"'
 
     - name: restart psconfig-maddash-agent
       service:
