@@ -15,13 +15,12 @@
         name:
           - perfsonar-centralmanagement
           - htop
-#          - nscd
         state: present
 
-    - name: copy .json file
+    - name: Publish .json file
       command:  "psconfig publish /vagrant/ps-proj.json"
 
-    - name: copy psconfig remote
+    - name: Remote add file
       command:  'psconfig remote add "http://md.ufixu.com/psconfig/ps-proj.json"'
 
     - name: start service if not running
@@ -50,6 +49,13 @@
 
     - name: add esmond access for local net
       command:  "/usr/sbin/esmond_manage add_user_ip_address example-user1 192.168.1.0/24"
+
+My perfSONAR Dashboard
+    - name: add new project name for web site
+      ansible.builtin.replace:
+        path: /etc/maddash/maddash-webui/config.json
+        regexp: '"My perfSONAR Dashboard"'
+        replace: '"Example Maddash setup, with disjoint option"'
 
     - name: add correct grid name
       ansible.builtin.replace:
@@ -82,9 +88,9 @@
         name: httpd
         state: restarted
 
-    - name: shorten test times, packet loss
+    - name: shorten test times, packet loss, every 5min
       command:  "psconfig maddash-grid edit --name default_loss --check-interval PT5M"
 
-    - name: shorten test time, throughput
+    - name: shorten test time, throughput, every 2hr
       command: "psconfig maddash-grid edit --name default_throughput --check-interval PT2H"
 

@@ -14,10 +14,6 @@
       yum:
         name:
           - perfsonar-testpoint
-#          - perfsonar-toolkit-security
-#          - perfsonar-toolkit-servicewatcher
-#          - perfsonar-toolkit-systemenv-testpoint
           - chrony
           - htop
-#          - nscd
         state: present
