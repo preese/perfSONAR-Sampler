@@ -24,7 +24,7 @@
     },
 
     "groups": {
-         "SUPS_group_disjoint": {
+         "Home_group_disjoint": {
              "type": "disjoint",
              "a-addresses": [
                     { "name": "dj1" },
@@ -76,12 +76,12 @@
     },
 
     "schedules": {
-        "SUPS_schedule_PT2H": {
+        "Home_schedule_PT2H": {
             "repeat": "PT2H",
             "sliprand": true,
             "slip": "PT2H"
         },
-        "SUPS_schedule_PT10M": {
+        "Home_schedule_PT10M": {
             "repeat": "PT10M",
             "sliprand": true,
             "slip": "PT10M"
@@ -90,36 +90,36 @@
 
     "tasks": {
         "task_dj_throughput": {
-            "group": "SUPS_group_disjoint",
+            "group": "Home_group_disjoint",
             "test": "test_throughput",
-            "schedule": "SUPS_schedule_PT2H",
-            "archives": [ "SUPS_esmond_archive" ],
-            "_meta": {
-                "display-name": "Disjoint-2"
-            }
-        },
-        "task_dj_rtt": {
-            "group": "SUPS_group_disjoint",
-            "test": "test_rtt",
-            "schedule": "SUPS_schedule_PT10M",
-            "archives": [ "SUPS_esmond_archive" ],
+            "schedule": "Home_schedule_PT2H",
+            "archives": [ "Home_esmond_archive" ],
             "_meta": {
                 "display-name": "Disjoint-3"
             }
         },
+        "task_dj_rtt": {
+            "group": "Home_group_disjoint",
+            "test": "test_rtt",
+            "schedule": "Home_schedule_PT10M",
+            "archives": [ "Home_esmond_archive" ],
+            "_meta": {
+                "display-name": "Disjoint-2"
+            }
+        },
         "task_dj_latencybg": {
-            "group": "SUPS_group_disjoint",
+            "group": "Home_group_disjoint",
             "test": "test_latencybg",
-            "archives": [ "SUPS_esmond_archive" ],
+            "archives": [ "Home_esmond_archive" ],
             "_meta": {
                 "display-name": "Disjoint-1"
             }
         },
         "task_dj_trace": {
-            "group": "SUPS_group_disjoint",
+            "group": "Home_group_disjoint",
             "test": "test_trace",
-            "schedule": "SUPS_schedule_PT10M",
-            "archives": [ "SUPS_esmond_archive" ],
+            "schedule": "Home_schedule_PT10M",
+            "archives": [ "Home_esmond_archive" ],
             "_meta": {
                 "display-name": "Disjoint-4"
             }

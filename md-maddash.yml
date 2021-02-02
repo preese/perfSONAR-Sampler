@@ -15,7 +15,7 @@
         name:
           - perfsonar-centralmanagement
           - htop
-          - nscd
+#          - nscd
         state: present
 
     - name: copy .json file
@@ -70,17 +70,17 @@
     - name: restart maddash-server
       service:
         name: maddash-server
-        state: started
+        state: restarted
 
     - name: restart psconfig-maddash-agent
       service:
         name: psconfig-maddash-agent
-        state: started
+        state: restarted
 
     - name: restart httpd
       service:
         name: httpd
-        state: reloaded
+        state: restarted
 
     - name: shorten test times, packet loss
       command:  "psconfig maddash-grid edit --name default_loss --check-interval PT5M"

@@ -12,15 +12,15 @@
     - name: restart psconfig-maddash-agent
       service:
         name: psconfig-maddash-agent
-        state: reloaded
+        state: restarted
 
     - name: restart httpd
       service:
         name: httpd
-        state: reloaded
+        state: restarted
 
-    - name: shorten test times, packet loss
-      command:  "psconfig maddash-grid edit --name default_loss --check-interval PT5M"
-
-    - name: shorten test time, throughput
-      command: "psconfig maddash-grid edit --name default_throughput --check-interval PT2H"
+#    - name: shorten test times, packet loss
+#      command:  "psconfig maddash-grid edit --name default_loss --check-interval PT5M"
+#
+#    - name: shorten test time, throughput
+#      command: "psconfig maddash-grid edit --name default_throughput --check-interval PT2H"
