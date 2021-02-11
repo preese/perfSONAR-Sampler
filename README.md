@@ -54,7 +54,8 @@ When you are happy with the results, add in the disjoint grid.
 
 ```
 ansible-playbook maddash-dj.yml -i  hosts -l md
-   (this configures the MaDDash host to accept traffic from a second grid and how to show it on the web page)
+   (this configures the MaDDash host to accept traffic from a second grid 
+   and how to show it on the web page)
 ansible-playbook disjoing.yml -i hosts -l dj,vm
    (configure all the edge nodes with a second set of tasks to perform)
    (note that ALL the hosts are sent both task .json URLs)
