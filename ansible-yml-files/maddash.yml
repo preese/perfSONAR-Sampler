@@ -3,21 +3,21 @@
 - hosts: all
   become: yes
   tasks:
-    - name: install extra repos
+    - name: install EPEL an perfsonar repos
       yum:
         name:
           - epel-release
           - http://software.internet2.edu/rpms/el7/x86_64/latest/packages/perfSONAR-repo-0.10-1.noarch.rpm
         state: present
 
-    - name: upgrade all packages, excluding kernel related packages
+    - name: add perfsonar-centralmanagment rpm
       yum:
         name:
           - perfsonar-centralmanagement
           - htop
         state: present
 
-    - name: copy disjoint.json file to Maddash node
+    - name: copy mesh.json file to Maddash node
       copy:
         src: ../perfS-json-files/mesh.json
         dest: /home/vagrant/mesh.json
@@ -30,12 +30,12 @@
     - name: Remote add file
       command:  'psconfig remote add "http://md.ufixu.com/psconfig/mesh.json"'
 
-    - name: start service if not running
+    - name: start FW service if not running
       service:
         name: firewalld
         state: started
 
-    - name: enable service
+    - name: enable FW service
       service:
         name: firewalld
         enabled: yes

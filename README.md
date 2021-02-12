@@ -32,17 +32,17 @@ Fix up any issues that may present themselves.
 ```
 cd ansible-yml-files
    (edit the 'hosts' file if needed to reflect any name changes you may have made)
-ansible-playbook nodes.yml -i hosts -l vm
+ansible-playbook nodes.yml -i hosts -l ps,dj
    (this loads up the edge nodes with needed rpms)
-ansible-playbook mesh.yml -i hosts -l vm
+ansible-playbook mesh.yml -i hosts -l ps,dj
    (sets up 'work' that the nodes will do and report to the MaDDash VM)
 ```
 
-The three edge nodes are ready to go now.  
+The three edge nodes (and the 3 disjoint nodes) are ready to go now.  
 
 Configure the MaDDash host now.
 ```
-ansible-playbook maddash.yml -i hosts -l md,dj
+ansible-playbook maddash.yml -i hosts -l mad
    (this is where most of Andy's document is implemented)
    (at the end of this file, the time frames for two tests, 
    RTT and Throughput are shortened)
@@ -56,10 +56,10 @@ When you are happy with the results, add in the disjoint grid.
 
 ## Add second grid page and integrate the disjoint mesh
 ```
-ansible-playbook maddash-dj.yml -i hosts -l md
+ansible-playbook maddash-dj.yml -i hosts -l mad
    (this configures the MaDDash host to accept traffic from a second grid 
    and how to show it on the web page)
-ansible-playbook disjoint.yml -i hosts -l dj,vm
+ansible-playbook disjoint.yml -i hosts -l dj,ps
    (configure all the edge nodes with a second set of tasks to perform)
    (note that ALL the hosts are sent both task .json URLs)
 ```
