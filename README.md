@@ -1,5 +1,5 @@
 # perfSONAR-Sampler
-This project illustrates, using VMs, what the document 'MaDDash and perfSONAR install' covers bit by bit.  
+This project illustrates, using VMs, what the document 'MaDDash and perfSONAR install' covers bit by bit. (see https://docs.google.com/document/d/1k7FT66MKPy3JjpD5k0OFAFlTpSdFmZ6huhTUDQ2rGGY/edit?usp=sharing)
 
 Andy Lake put together the first version of this document several years ago.  That prompted an AHA! moment for me.  This project is an attempt to share that AHA! with others looking to better understand the perfSONAR and MaDDash projects.
 
@@ -10,7 +10,7 @@ It also shows how to setup a second grid page showing a disjoint grid rather tha
 The Wiki page for the project details how setup the base environment using a single NUC computer.  Once that environment is setup, return here for the next steps.
 
 ## Building the VMs
-The first step is to bring up all the needed VMs.  This is composed for 3 mech network perfSONAR nodes, a fourth node for the Central Managment and MaDDash servers.  To minimize steps, we'll just bring up 3 nodes used for the disjoint grid.
+The first step is to bring up all the needed VMs.  This is composed for 3 mesh network perfSONAR nodes, a fourth node for the Central Managment and MaDDash servers.  To minimize steps, we'll just bring up 3 nodes used for the disjoint grid.
 ```
 git clone https://github.com/preese/perfSONAR-Sampler.git
 cd perfSONAR-Sampler
@@ -35,7 +35,7 @@ cd ansible-yml-files
 ansible-playbook nodes.yml -i hosts -l vm
    (this loads up the edge nodes with needed rpms)
 ansible-playbook mesh.yml -i hosts -l vm
-	(sets up 'work' that the nodes will do and report to the MaDDash VM)
+   (sets up 'work' that the nodes will do and report to the MaDDash VM)
 ```
 
 The three edge nodes are ready to go now.  
@@ -56,10 +56,10 @@ When you are happy with the results, add in the disjoint grid.
 
 ## Add second grid page and integrate the disjoint mesh
 ```
-ansible-playbook maddash-dj.yml -i  hosts -l md
+ansible-playbook maddash-dj.yml -i hosts -l md
    (this configures the MaDDash host to accept traffic from a second grid 
    and how to show it on the web page)
-ansible-playbook disjoing.yml -i hosts -l dj,vm
+ansible-playbook disjoint.yml -i hosts -l dj,vm
    (configure all the edge nodes with a second set of tasks to perform)
    (note that ALL the hosts are sent both task .json URLs)
 ```
