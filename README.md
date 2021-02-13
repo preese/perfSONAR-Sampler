@@ -5,7 +5,7 @@ Andy Lake put together the first version of this document several years ago.  Th
 
 The project pulls together .json, vagrant and ansible files to move from a number of bare VMs to a working perfSONAR and MaDDash grid.  It doesn't show real network tests but just traffic between the different VMs on the single host.  The project files can be subsequently used on real hardware for perfSONAR node configs and MaDDash server's web setups.
 
-The project also shows how to setup a second grid page showing a disjoint grid in addition to the more traditional mesh grid.
+The project also shows how to setup a second dashboard showing a disjoint grid in addition to the more traditional mesh grid.
 
 The Wiki page for the project details how setup the base environment using a single NUC computer.  Once that environment is setup, return here for the next steps.
 
@@ -24,7 +24,7 @@ Start the VMs:
 vagrant up --provider libvirt
 ```
 
-Fix up any issues that may present themselves.
+Due to a glitch in one of the Ruby sections, an error is shown for each VM as it is being built.  It doesn't seem to impact the VMs operation however.  Fix up any other issues that may present themselves.
 
 ## Use Ansible to configure the VMs
 ```
@@ -33,7 +33,7 @@ cd ansible-yml-files
 ansible-playbook nodes.yml -i hosts -l ps,dj
    (this loads up the edge nodes with needed rpms, for all nodes)
 ansible-playbook mesh.yml -i hosts -l ps
-   (sets up 'work' that the nodes will do and report to the mesh MaDDash VM)
+   (sets up 'mesh work' that the nodes will do and report to the MaDDash VM)
 ```
 
 The three edge nodes (and the 3 disjoint nodes) are ready to go now.  
