@@ -28,7 +28,7 @@
       command:  "psconfig publish /home/vagrant/mesh.json"
 
     - name: Remote add file
-      command:  'psconfig remote add "http://md.ufixu.com/psconfig/mesh.json"'
+      command:  'psconfig remote add "http://192.168.1.213/psconfig/mesh.json"'
 
     - name: start FW service if not running
       service:

@@ -46,7 +46,7 @@ ansible-playbook maddash.yml -i hosts -l mad
    RTT and Throughput are shortened)
 ```
 
-You should be able to vist the MaDDash server URL at this point.  In the stock case it would be **http://md.ufixu.com/maddash-webui**
+You should be able to vist the MaDDash server URL at this point.  In the stock case it would be **http://192.168.1.213/maddash-webui**
 
 Let the project run for a couple of hours.   If all went well, you should see the grid start to populate.
 
