@@ -4,7 +4,7 @@
   become: yes
   tasks:
     - name: install remote URL and archives for disjoint grid
-      command: 'psconfig remote  add --configure-archives "http://md.ufixu.com/psconfig/disjoint.json"'
+      command: 'psconfig remote  add --configure-archives "http://192.168.1.213/psconfig/disjoint.json"'
       
     - name: restart psconfig-pscheduler-agent
       service:
