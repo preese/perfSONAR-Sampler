@@ -7,7 +7,7 @@ The project pulls together .json, vagrant and ansible files to move from a numbe
 
 The project also shows how to setup a second dashboard showing a disjoint grid in addition to the more traditional mesh grid.
 
-The Wiki page for the project details how setup the base environment using a single NUC computer.  Once that environment is setup, return here for the next steps.
+The Wiki page for the project details how to setup the base environment using a small single NUC computer.  Once that environment is setup, return here for the next steps.
 
 ## Building the VMs
 The first step is to bring up all the needed VMs.  This is composed for 3 mesh network perfSONAR nodes, a fourth node for the Central Managment and MaDDash servers.  To minimize steps, we'll also bring up the 3 nodes used for the disjoint grid.
@@ -15,8 +15,8 @@ The first step is to bring up all the needed VMs.  This is composed for 3 mesh n
 git clone https://github.com/preese/perfSONAR-Sampler.git
 cd perfSONAR-Sampler
 vi Vagrantfile
-   (edit the file to replace any MAC addr, IP and specifically the name of the second
-   ethernet port)
+   (edit the file to replace any MAC addr, host name and specifically the name of the
+   second ethernet port!)
 ```
 
 Start the VMs:
@@ -52,14 +52,15 @@ Let the project run for a couple of hours.   If all went well, you should see th
 
 When you are happy with the results, add in the disjoint grid.
 
-## Add second grid page and integrate the disjoint nodes
+## Add second dashboard page and integrate the disjoint nodes
 ```
 ansible-playbook maddash-dj.yml -i hosts -l mad
-   (this configures the MaDDash host to accept traffic from a second grid 
-   and how to show it as a second dashboard)
+   (this configures the MaDDash host to accept traffic from additional 
+   nodes and show sesults on a second dashboard)
 ansible-playbook disjoint.yml -i hosts -l dj,ps
    (configure all the edge nodes with a second set of tasks to perform)
-   (note that ALL the hosts are sent the .json links)
+   (note that ALL the hosts are sent the .json links, though only those
+   involved will do the tests)
 ```
 
 
