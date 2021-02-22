@@ -4,7 +4,7 @@ This project doesn't do any network monitoring! It does show how you can set up 
 
 
 
-This is essentially a virtual machine implementation of Andy Lake's [MaDDash Quick Install Guide v4](https://docs.google.com/document/d/1k7FT66MKPy3JjpD5k0OFAFlTpSdFmZ6huhTUDQ2rGGY/edit?usp=sharing} document.
+This is essentially a virtual machine implementation of Andy Lake's [[https://docs.google.com/document/d/1k7FT66MKPy3JjpD5k0OFAFlTpSdFmZ6huhTUDQ2rGGY/edit?usp=sharing| MaDDash Quick Install Guide v4]] document.
 
 
 The project has been intentionally tested this on a small system, an Intel Nuc (NUC8i3BEK). It has a dual core Intel Core i3-8109U, 8G of RAM, and a 230g M.2 SATA drive. The project works on this level of hardware. If you have a larger box for this demo system, it will make the install and operation smoother.
