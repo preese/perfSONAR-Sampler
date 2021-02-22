@@ -3,7 +3,7 @@ This project illustrates, using VMs, what the document 'MaDDash and perfSONAR in
 
 Andy Lake put together the first version of this document several years ago.  That prompted an AHA! moment for me.  This project is an attempt to share that AHA! with others looking to better understand the perfSONAR and MaDDash projects.
 <p align="center">
-<img src="docs/Grind-images.png">
+<img src="https://github.com/preese/perfSONAR-Sampler/blob/main/docs/Grid-images.png">
 </p>
 
 The project pulls together .json, vagrant and ansible files to move from a number of bare VMs to a working perfSONAR and MaDDash grid.  It doesn't show real network tests but just traffic between the different VMs on the single host.  The project files can be subsequently used on real hardware for perfSONAR node configs and MaDDash server's web setups.
