@@ -1,5 +1,6 @@
 # perfSONAR-Sampler
-This project illustrates, using VMs, what the document 'MaDDash and perfSONAR install' covers bit by bit. (see https://docs.google.com/document/d/1k7FT66MKPy3JjpD5k0OFAFlTpSdFmZ6huhTUDQ2rGGY/edit?usp=sharing)
+This project illustrates, using VMs, what the document 'MaDDash and perfSONAR install' covers bit by bit. (see
+https://github.com/preese/perfSONAR-Sampler/blob/main/docs/MD-PS-install.html)
 
 Andy Lake put together the first version of this document several years ago.  That prompted an AHA! moment for me.  This project is an attempt to share that AHA! with others looking to better understand the perfSONAR and MaDDash projects.
 <p align="left">
