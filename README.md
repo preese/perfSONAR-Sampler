@@ -13,7 +13,7 @@ The project also shows how to setup a second dashboard showing a disjoint grid i
 <img src="https://github.com/preese/perfSONAR-Sampler/blob/main/docs/Disjointgrid.png">
 </p>
 
-The [Wiki page](../../../wiki) for the project details how to setup the base environment using a small single NUC computer.  Once that environment is setup, return here for the next steps.
+The [Wiki page](../../wiki) for the project details how to setup the base environment using a small single NUC computer.  Once that environment is setup, return here for the next steps.
 
 ## Building the VMs
 The first step is to bring up all the needed VMs.  This is composed for 3 mesh network perfSONAR nodes, a fourth node for the Central Managment and MaDDash servers.  To minimize steps, we'll also bring up the 3 nodes used for the disjoint grid.
