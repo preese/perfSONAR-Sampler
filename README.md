@@ -18,7 +18,7 @@ The [Wiki page](../../wiki) for the project details how to setup the base enviro
 ## Building the VMs
 The first step is to bring up all the needed VMs.  This is composed for 3 mesh network perfSONAR nodes, a fourth node for the Central Managment and MaDDash servers.  To minimize steps, we'll also bring up the 3 nodes used for the disjoint grid.
 ```
-git clone https://github.com/preese/perfSONAR-Sampler.git
+curl -L https://github.com/preese/perfSONAR-Sampler/archive/main.tar.gz | tar xzf -
 cd perfSONAR-Sampler
 vi Vagrantfile
    (edit the file to replace any MAC addr, host name and specifically the name of the
