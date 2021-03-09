@@ -1,6 +1,6 @@
 ---
 
-- hosts: all
+- hosts: mad
   become: yes
   tasks:
     - name: publish disjoint.json file
