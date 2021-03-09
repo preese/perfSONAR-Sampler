@@ -3,17 +3,10 @@
 - hosts: all
   become: yes
   tasks:
-    - name: copy disjoint.json file to Maddash node
-      copy:
-        src: ../perfS-json-files/disjoint.json
-        dest: /home/vagrant/disjoint.json
-        owner: vagrant
-        group: vagrant
-     
     - name: publish disjoint.json file
       command:  "psconfig publish /home/vagrant/disjoint.json"
 
-    - name: make availalbe to nodes
+    - name: make available to nodes
       command:  'psconfig remote add "http://192.168.1.213/psconfig/disjoint.json"'
 
     - name: restart psconfig-maddash-agent
@@ -24,4 +17,16 @@
     - name: restart httpd
       service:
         name: httpd
+        state: restarted
+
+- hosts: ps,dj
+  gather_fact: False
+  become: yes
+  tasks:
+    - name: install remote URL and archives for disjoint grid
+      command: 'psconfig remote  add --configure-archives "http://192.168.1.213/psconfig/disjoint.json"'
+      
+    - name: restart psconfig-pscheduler-agent
+      service:
+        name: psconfig-pscheduler-agent
         state: restarted

@@ -3,13 +3,6 @@
 - hosts: all
   become: yes
   tasks:
-    - name: install EPEL an perfsonar repos
-      yum:
-        name:
-          - epel-release
-          - http://software.internet2.edu/rpms/el7/x86_64/latest/packages/perfSONAR-repo-0.10-1.noarch.rpm
-        state: present
-
     - name: add perfsonar-centralmanagment rpm
       yum:
         name:
@@ -17,20 +10,7 @@
           - htop
         state: present
 
-    - name: copy mesh.json file to Maddash node
-      copy:
-        src: ../perfS-json-files/mesh.json
-        dest: /home/vagrant/mesh.json
-        owner: vagrant
-        group: vagrant
-     
-    - name: Publish .json file
-      command:  "psconfig publish /home/vagrant/mesh.json"
-
-    - name: Remote add file
-      command:  'psconfig remote add "http://192.168.1.213/psconfig/mesh.json"'
-
-    - name: start FW service if not running
+   - name: start FW service if not running
       service:
         name: firewalld
         state: started
@@ -54,7 +34,27 @@
         immediate: yes
         state: enabled
 
-    - name: add esmond access for local net
+    - name: copy mesh.json file to Maddash node
+      copy:
+        src: ../perfS-json-files/mesh.json
+        dest: /home/vagrant/mesh.json
+        owner: vagrant
+        group: vagrant
+     
+    - name: copy disjoint.json file to Maddash node
+      copy:
+        src: ../perfS-json-files/disjoint.json
+        dest: /home/vagrant/disjoint.json
+        owner: vagrant
+        group: vagrant
+     
+    - name: Publish mesh.json file
+      command:  "psconfig publish /home/vagrant/mesh.json"
+
+    - name: Remote add file
+      command:  'psconfig remote add "http://192.168.1.213/psconfig/mesh.json"'
+
+     - name: add esmond access for local net
       command:  "/usr/sbin/esmond_manage add_user_ip_address example-user1 192.168.1.0/24"
 
     - name: add new project name for web site
