@@ -1,19 +1,25 @@
 # perfSONAR-Sampler
-This project illustrates, using VMs, what the document 'MaDDash and perfSONAR install' covers bit by bit. (see https://docs.google.com/document/d/1k7FT66MKPy3JjpD5k0OFAFlTpSdFmZ6huhTUDQ2rGGY/edit?usp=sharing)
+This project illustrates, using VMs, what the document [MaDDash Quick Install Guide v4](https://docs.google.com/document/d/1k7FT66MKPy3JjpD5k0OFAFlTpSdFmZ6huhTUDQ2rGGY/edit?usp=sharing) covers bit by bit.
 
 Andy Lake put together the first version of this document several years ago.  That prompted an AHA! moment for me.  This project is an attempt to share that AHA! with others looking to better understand the perfSONAR and MaDDash projects.
+<p align="left">
+<img src="https://github.com/preese/perfSONAR-Sampler/blob/main/docs/Maingrid.png">
+</p>
 
 The project pulls together .json, vagrant and ansible files to move from a number of bare VMs to a working perfSONAR and MaDDash grid.  It doesn't show real network tests but just traffic between the different VMs on the single host.  The project files can be subsequently used on real hardware for perfSONAR node configs and MaDDash server's web setups.
 
 The project also shows how to setup a second dashboard showing a disjoint grid in addition to the more traditional mesh grid.
+<p align="left">
+<img src="https://github.com/preese/perfSONAR-Sampler/blob/main/docs/Disjointgrid.png">
+</p>
 
-The Wiki page for the project details how to setup the base environment using a small single NUC computer.  Once that environment is setup, return here for the next steps.
+The [Wiki page](../../wiki) for the project details how to setup the base environment using a small single NUC computer.  Once that environment is setup, return here for the next steps.
 
 ## Building the VMs
 The first step is to bring up all the needed VMs.  This is composed for 3 mesh network perfSONAR nodes, a fourth node for the Central Managment and MaDDash servers.  To minimize steps, we'll also bring up the 3 nodes used for the disjoint grid.
 ```
-git clone https://github.com/preese/perfSONAR-Sampler.git
-cd perfSONAR-Sampler
+curl -L https://github.com/preese/perfSONAR-Sampler/archive/main.tar.gz | tar xzf -
+cd perfSONAR-Sampler-main
 vi Vagrantfile
    (edit the file to replace any MAC addr, host name and specifically the name of the
    second ethernet port!)
