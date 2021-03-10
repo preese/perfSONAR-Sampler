@@ -3,7 +3,7 @@
 - hosts: all
   become: yes
   tasks:
-    - name: Install EPEL&PS repo to all VMs
+    - name: Install EPEL & PS repo to all VMs
       yum:
         name:
           - epel-release
@@ -14,16 +14,16 @@
   gather_facts: False
   become: yes
   tasks:
-    - name: Add perfsonar rpms to all testpoint edge nodes
+    - name: For ps & dj VMs, add perfsonar rpms to all testpoint edge nodes
       yum:
         name:
           - perfsonar-testpoint
         state: present
 
-    - name: Install remote URL and archives, even before the .json is published, the testpoints will be ok
+    - name: For ps & dj VMs, install remote URL and archives, even before the .json is published, the testpoints will be ok
       command: 'psconfig remote  add --configure-archives "http://192.168.1.213/psconfig/mesh.json"'
      
-    - name: Restart psconfig-pscheduler-agent
+    - name: For ps & dj VMs, restart psconfig-pscheduler-agent
       service:
         name: psconfig-pscheduler-agent
         state: restarted
@@ -32,7 +32,7 @@
   gather_facts: False
   become: yes
   tasks:
-    - name: Add perfsonar-centralmanagment rpm to MaDDash Server
+    - name: For md VM and all the reaming lines, add perfsonar-centralmanagment rpm to MaDDash Server
       yum:
         name:
           - perfsonar-centralmanagement
