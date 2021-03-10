@@ -41,7 +41,7 @@ When you are happy with the results, add in the disjoint grid.
 
 ## Add second dashboard page and integrate the disjoint nodes
 ```
-ansible-playbook maddash-dj.yml -i hosts -l mad.ps,dj
+ansible-playbook maddash-dj.yml -i hosts -l mad,ps,dj
    (this configures the MaDDash host to accept traffic from additional 
    nodes and show sesults on a second dashboard.  It also configures the testpoint nodes
    for the additionsl disjoint dashboard)
