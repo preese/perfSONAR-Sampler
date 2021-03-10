@@ -26,7 +26,7 @@ Vagrant.configure("2") do |config|
 	 end
     end
    config.vm.provision "ansible" do |ansible|
-     ansible.playbook = "/home/vagrant/perfSONAR-Sampler/ansible-yml-files/Testpoint-MaDDashbuild.yml"
+     ansible.playbook = "/home/vagrant/perfSONAR-Sampler-main/ansible-yml-files/Testpoint-MaDDashbuild.yml"
    end
  
 end

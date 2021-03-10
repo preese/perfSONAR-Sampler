@@ -74,7 +74,7 @@
         owner: vagrant
         group: vagrant
  
-     - name: Publish mesh.json file for web use
+    - name: Publish mesh.json file for web use
       command:  "psconfig publish /home/vagrant/mesh.json"
 
     - name: Add access to esmond for local net, EDIT if you used a different range!
