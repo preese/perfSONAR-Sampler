@@ -15,7 +15,7 @@ The project also shows how to setup a second dashboard showing a disjoint grid i
 
 The [Wiki page](../../wiki) for the project details how to setup the base environment using a single NUC computer.  Once that environment is setup, return here for the next steps.
 
-## Building the VMs
+## Building and Configure the VMs
 The first step is to bring up all the needed VMs.  This is composed of 3 mesh network perfSONAR nodes, a fourth node for the Central Managment and MaDDash servers.  To minimize steps, we'll also bring up the 3 nodes used for the disjoint grid discussed later.
 ```
 curl -L https://github.com/preese/perfSONAR-Sampler/archive/main.tar.gz | tar xzf -
@@ -33,24 +33,6 @@ vagrant up --provider libvirt
 
 Due to a glitch in one of the Ruby sections, an error is shown for each VM as it is being built.  It doesn't seem to impact the VMs operation.  Fix up any other issues that may present themselves.
 
-## Use Ansible to configure the VMs
-```
-cd ansible-yml-files
-   (edit the 'hosts' file to reflect any name changes you may have made)
-ansible-playbook nodes.yml -i hosts -l ps,dj,mad
-   (this loads up the edge nodes with needed rpms, for all nodes)
-```
-
-The three edge nodes (and the 3 disjoint nodes) are ready to go now.  
-
-## Configure the MaDDash host
-```
-ansible-playbook maddash.yml -i hosts -l mad
-   (this is where most of Andy's document is implemented)
-   (at the end of this file, the time frames for two tests, 
-   RTT and Throughput are shortened)
-```
-
 You should be able to vist the MaDDash server URL at this point.  In the stock case it would be **http://192.168.1.213/maddash-webui**
 
 Let the project run for a couple of hours.   If all went well, you should see the grid start to populate.
@@ -59,14 +41,9 @@ When you are happy with the results, add in the disjoint grid.
 
 ## Add second dashboard page and integrate the disjoint nodes
 ```
-ansible-playbook maddash-dj.yml -i hosts -l mad
+ansible-playbook maddash-dj.yml -i hosts -l mad.ps,dj
    (this configures the MaDDash host to accept traffic from additional 
-   nodes and show sesults on a second dashboard)
-
-ansible-playbook disjoint.yml -i hosts -l dj,ps
-   (configure all the edge nodes with a second set of tasks to perform)
-   (note that ALL the hosts are sent the .json links, though only those
+   nodes and show sesults on a second dashboard.  It also configures the testpoint nodes
+   for the additionsl disjoint dashboard)
+   (NOTE: ALL the hosts are sent both .json file links, though only those
    involved will do the tests)
-```
-
-

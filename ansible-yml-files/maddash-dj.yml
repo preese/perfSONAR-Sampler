@@ -3,18 +3,18 @@
 - hosts: mad
   become: yes
   tasks:
-    - name: publish disjoint.json file
+    - name: Publish disjoint.json file for web use
       command:  "psconfig publish /home/vagrant/disjoint.json"
 
-    - name: make available to nodes
+    - name: Remote add disjoint file, lets the archive know where the JSON config file lives
       command:  'psconfig remote add "http://192.168.1.213/psconfig/disjoint.json"'
 
-    - name: restart psconfig-maddash-agent
+    - name: Restart psconfig-maddash-agent
       service:
         name: psconfig-maddash-agent
         state: restarted
 
-    - name: restart httpd
+    - name: Restart httpd
       service:
         name: httpd
         state: restarted
