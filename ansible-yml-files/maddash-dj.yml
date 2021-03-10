@@ -20,7 +20,6 @@
         state: restarted
 
 - hosts: ps,dj
-  gather_fact: False
   become: yes
   tasks:
     - name: install remote URL and archives for disjoint grid

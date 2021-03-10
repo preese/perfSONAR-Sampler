@@ -11,7 +11,6 @@
         state: present
 
 - hosts: ps,dj
-  gather_facts: False
   become: yes
   tasks:
     - name: Add perfsonar rpms

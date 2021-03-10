@@ -10,7 +10,7 @@
           - htop
         state: present
 
-   - name: start FW service if not running
+    - name: start FW service if not running
       service:
         name: firewalld
         state: started
@@ -54,7 +54,7 @@
     - name: Remote add file
       command:  'psconfig remote add "http://192.168.1.213/psconfig/mesh.json"'
 
-     - name: add esmond access for local net
+    - name: add esmond access for local net
       command:  "/usr/sbin/esmond_manage add_user_ip_address example-user1 192.168.1.0/24"
 
     - name: add new project name for web site
