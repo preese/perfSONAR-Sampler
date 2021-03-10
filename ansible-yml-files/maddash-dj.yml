@@ -1,6 +1,7 @@
 ---
 
 - hosts: mad
+  gather_facts: False
   become: yes
   tasks:
     - name: Publish disjoint.json file for web use
@@ -20,6 +21,7 @@
         state: restarted
 
 - hosts: ps,dj
+  gather_facts: False
   become: yes
   tasks:
     - name: install remote URL and archives for disjoint grid

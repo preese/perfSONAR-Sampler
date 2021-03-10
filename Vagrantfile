@@ -2,13 +2,13 @@
 # vi: set ft=ruby :
 
 nodes = [
-  {:hostname => 'ps1', :ip => "192.168.1.210", :mac => "52:54:00:83:6f:41", :dev => "enp4s0" },
-  {:hostname => 'ps2', :ip => "192.168.1.211", :mac => "52:54:00:83:6f:42", :dev => "enp4s0" },
-  {:hostname => 'ps3', :ip => "192.168.1.212", :mac => "52:54:00:83:6f:43", :dev => "enp4s0" },
-  {:hostname => 'md', :ip => "192.168.1.213", :mac => "52:54:00:83:6f:44", :dev => "enp4s0" },
-  {:hostname => 'dj1', :ip => "192.168.1.214", :mac => "52:54:00:83:6f:45", :dev => "enp4s0" },
-  {:hostname => 'dj2', :ip => "192.168.1.215", :mac => "52:54:00:83:6f:46", :dev => "enp4s0" },
-  {:hostname => 'dj3', :ip => "192.168.1.216", :mac => "52:54:00:83:6f:47", :dev => "enp4s0" }
+  {:hostname => 'ps1', :ip => "192.168.1.210", :mac => "52:54:00:83:6f:41", :dev => "enp0s20f0u2" },
+  {:hostname => 'ps2', :ip => "192.168.1.211", :mac => "52:54:00:83:6f:42", :dev => "enp0s20f0u2" },
+  {:hostname => 'ps3', :ip => "192.168.1.212", :mac => "52:54:00:83:6f:43", :dev => "enp0s20f0u2" },
+  {:hostname => 'md', :ip => "192.168.1.213", :mac => "52:54:00:83:6f:44", :dev => "enp0s20f0u2" },
+  {:hostname => 'dj1', :ip => "192.168.1.214", :mac => "52:54:00:83:6f:45", :dev => "enp0s20f0u2" },
+  {:hostname => 'dj2', :ip => "192.168.1.215", :mac => "52:54:00:83:6f:46", :dev => "enp0s20f0u2" },
+  {:hostname => 'dj3', :ip => "192.168.1.216", :mac => "52:54:00:83:6f:47", :dev => "enp0s20f0u2" }
 ]
 
 Vagrant.configure("2") do |config|
@@ -25,8 +25,4 @@ Vagrant.configure("2") do |config|
 	  end
 	 end
     end
-   config.vm.provision "ansible" do |ansible|
-     ansible.playbook = "/home/vagrant/perfSONAR-Sampler-main/ansible-yml-files/Testpoint-MaDDashbuild.yml"
-   end
- 
 end

@@ -11,6 +11,7 @@
         state: present
 
 - hosts: ps,dj
+  gather_facts: False
   become: yes
   tasks:
     - name: Add perfsonar rpms to all testpoint edge nodes
@@ -28,6 +29,7 @@
         state: restarted
 
 - hosts: mad
+  gather_facts: False
   become: yes
   tasks:
     - name: Add perfsonar-centralmanagment rpm to MaDDash Server

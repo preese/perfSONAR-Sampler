@@ -33,6 +33,12 @@ vagrant up --provider libvirt
 
 Due to a glitch in one of the Ruby sections, an error is shown for each VM as it is being built.  It doesn't seem to impact the VMs operation.  Fix up any other issues that may present themselves.
 
+```
+ansible-playbook Testpoint-MaDDashbuild.yml -i hosts
+   (Many things are packed into the playbook.  The testpoints and MD servers are built,
+   provisioned and enabled.  The web page should have graphs on it when visited.)
+```
+
 You should be able to vist the MaDDash server URL at this point.  In the stock case it would be **http://192.168.1.213/maddash-webui**
 
 Let the project run for a couple of hours.   If all went well, you should see the grid start to populate.
@@ -41,7 +47,7 @@ When you are happy with the results, add in the disjoint grid.
 
 ## Add second dashboard page and integrate the disjoint nodes
 ```
-ansible-playbook maddash-dj.yml -i hosts -l mad,ps,dj
+ansible-playbook maddash-dj.yml -i hosts
    (this configures the MaDDash host to accept traffic from additional 
    nodes and show sesults on a second dashboard.  It also configures the testpoint nodes
    for the additionsl disjoint dashboard)
