@@ -1,6 +1,6 @@
 ---
 
-- hosts: mad
+- hosts: md
   gather_facts: False
   become: yes
   tasks:

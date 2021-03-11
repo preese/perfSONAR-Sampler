@@ -28,11 +28,11 @@
         name: psconfig-pscheduler-agent
         state: restarted
 
-- hosts: mad
+- hosts: md
   gather_facts: False
   become: yes
   tasks:
-    - name: For md VM and all the reaming lines, add perfsonar-centralmanagment rpm to MaDDash Server
+    - name: For md VM and remaining lines, add perfsonar-centralmanagment rpm to MaDDash Server
       yum:
         name:
           - perfsonar-centralmanagement
@@ -76,7 +76,7 @@
         owner: vagrant
         group: vagrant
  
-    - name: Publish mesh.json file for web use
+    - name: Publish mesh.json file (all the rest from the MaDDash Quick Install)
       command:  "psconfig publish /home/vagrant/mesh.json"
 
     - name: Add access to esmond for local net, EDIT if you used a different range!
