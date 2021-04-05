@@ -3,13 +3,6 @@
 - hosts: all
   become: yes
   tasks:
-    - name: Install EPEL & PS repo to all VMs
-      yum:
-        name:
-          - epel-release
-          - http://software.internet2.edu/rpms/el7/x86_64/latest/packages/perfSONAR-repo-0.10-1.noarch.rpm
-        state: present
-
 - hosts: ps,dj
   gather_facts: False
   become: yes
@@ -76,7 +69,7 @@
         owner: vagrant
         group: vagrant
  
-    - name: Publish mesh.json file (all the rest from the MaDDash Quick Install)
+    - name: Publish mesh.json file (remaining lines from the MaDDash Quick Install)
       command:  "psconfig publish /home/vagrant/mesh.json"
 
     - name: Add access to esmond for local net, EDIT if you used a different range!

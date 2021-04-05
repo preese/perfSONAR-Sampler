@@ -22,7 +22,13 @@ Vagrant.configure("2") do |config|
 		  domain.memory = 2048
 		  domain.cpus = 1
 		  domain.storage_pool_name = "default"
-	  end
+	  config.vm.provision "yumload", type:"shell", run: "once", inline: <<-SHELL
+        yum -y install epel-release
+        yum -y install http://software.internet2.edu/rpms/el7/x86_64/main/RPMS/perfSONAR-repo-0.10-1.noarch.rpm
+        yum -y clean all
+        yum -y update
+     SHELL
+      end
 	 end
     end
 end
