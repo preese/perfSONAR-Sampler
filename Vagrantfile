@@ -26,7 +26,6 @@ Vagrant.configure("2") do |config|
         yum -y install epel-release
         yum -y install http://software.internet2.edu/rpms/el7/x86_64/main/RPMS/perfSONAR-repo-0.10-1.noarch.rpm
         yum -y clean all
-        yum -y update
      SHELL
       end
 	 end
