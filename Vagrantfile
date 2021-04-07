@@ -16,13 +16,13 @@ Vagrant.configure("2") do |config|
     config.vm.define node[:hostname] do |config|
 	  config.vm.box = "centos/7"
 	  config.vm.network :public_network, :dev => node[:dev], :mode => "bridge", :mac => node[:mac], :ip => node[:ip]
-      config.vm.provision "file", source: "/home/vagrant/.ssh/id_ed25519.pub", destination: "/home/vagrant/.ssh/authorized_keys"
-      config.vm.hostname = node[:hostname]
+    config.vm.provision "file", source: "/home/vagrant/.ssh/id_ed25519.pub", destination: "/home/vagrant/.ssh/authorized_keys"
+    config.vm.hostname = node[:hostname]
 	  config.vm.provider :libvirt do |domain|
 		  domain.memory = 2048
 		  domain.cpus = 1
 		  domain.storage_pool_name = "default"
-      end
+       end
 	 end
     end
 end
