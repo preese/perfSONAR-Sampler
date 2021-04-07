@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
 		  domain.memory = 2048
 		  domain.cpus = 1
 		  domain.storage_pool_name = "default"
+         end
        end
-	 end
     end
 end
