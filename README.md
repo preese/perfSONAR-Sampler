@@ -34,8 +34,10 @@ Use Ansible to configure the nodes for persSONAR and MaDDash use.
 ```
 cd ansible-yml-files
 ansible-playbook Testpoint-MaDDashbuild.yml -i hosts
-   (Many things are packed into this playbook.  The testpoints and MD servers are built,
-   provisioned and enabled.  The web page should have graphs on it when visited.)
+   (This is a SLOW process, the command typically takes about 13 min to 
+   complete!  Many things are packed into this playbook.  The testpoints 
+   and MD servers are built, provisioned and enabled.  The web page should 
+   have grids on it when visited.)
 ```
 
 You should be able to vist the MaDDash server URL at this point.  In the stock case it would be **http://192.168.1.213/maddash-webui**, (change to your IP from the Chart).
