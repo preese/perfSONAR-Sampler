@@ -19,6 +19,7 @@ Two issues seem to dominate:
 1. building the vagrant-libvirt tool tends to fail.  At present, the following is a workable fix for the issue:
 instead of 'vagrant plugin install vagrant-libvirt' use this-
 'CFLAGS="-I/opt/vagrant/embedded/include/ruby-3.0.0/ruby" vagrant plugin install vagrant-libvirt'
+
 2.The perfsonar repos seem to be out of sync and often cause a dramatic failure during the ansible-playbook command.  An alternative rpm is suggested in the current code.  The orignal line is commented out.
 
 The [Wiki page](../../wiki) for the project details how to setup the base environment using a single NUC computer.  Once that environment is setup, return here for the next steps.
