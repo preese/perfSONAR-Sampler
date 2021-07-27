@@ -7,7 +7,9 @@
       yum:
         name:
           - epel-release
-          - http://software.internet2.edu/rpms/el7/x86_64/latest/packages/perfSONAR-repo-0.10-1.noarch.rpm
+# The following line should work but the PS mirrors sites seem out of sync.
+#          - http://software.internet2.edu/rpms/el7/x86_64/latest/packages/perfSONAR-repo-0.10-1.noarch.rpm
+          - http://software.internet2.edu/rpms/el7/x86_64/latest/packages/perfSONAR-repo-staging-0.10-1.noarch.rpm
         state: present
 
 - hosts: ps,dj
