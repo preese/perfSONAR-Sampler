@@ -13,7 +13,7 @@ The project also shows how to setup a second dashboard showing a disjoint grid i
 <img src="https://github.com/preese/perfSONAR-Sampler/blob/main/docs/Disjointgrid.png">
 </p>
 
-07/27/2021--With the passage of time, a number of the included repos have been updated which have caused issues with the flow of this project.
+# 07/27/2021--With the passage of time, a number of the included repos have been updated which have caused issues with the flow of this project.
 
 Two issues seem to dominate:
 1. building the vagrant-libvirt tool tends to fail.  At present, the following is a workable fix for the issue:
