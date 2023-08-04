@@ -1,0 +1,133 @@
+{
+    "_meta": {
+        "display-name": "perfSONAR-Sampler-v5 Grid"
+    },
+
+    "archives": {
+        "opensearch-archive":{
+           "archiver":"http",
+           "data":{
+              "schema":3,
+              "_url":"http://192.168.1.214/logstash",
+              "verify-ssl":false,
+              "op":"put",
+              "_headers":{
+                 "x-ps-observer":"{% scheduled_by_address %}",
+                 "content-type":"application/json"
+              }
+            },
+           "_meta": {
+              "esmond_url": "http://192.168.1.214/esmond/perfsonar/archive/"
+           }
+
+         }	   
+     },
+    "addresses": {
+        "ps1": { "address": "192.168.1.211" },
+        "ps2": { "address": "192.168.1.212" },
+        "ps3": { "address": "192.168.1.213" }
+    },
+
+    "groups": {
+        "Home_group_mesh": {
+            "type": "mesh",
+            "addresses": [
+                { "name": "ps1" },
+                { "name": "ps2" },
+                { "name": "ps3" }
+            ]
+         }
+     },
+    "tests": {
+        "test_throughput": {
+            "type": "throughput",
+            "spec": {
+                "source": "{% address[0] %}",
+                "dest": "{% address[1] %}",
+                "duration": "PT20S"
+            }
+        },
+        "test_rtt": {
+            "type": "rtt",
+            "spec": {
+                "source": "{% address[0] %}",
+                "dest": "{% address[1] %}",
+                "count": 10,
+                "interval": "PT1S",
+                "length": 1000
+            }
+        },
+        "test_latencybg": {
+            "type": "latencybg",
+            "spec": {
+                "source": "{% address[0] %}",
+                "dest": "{% address[1] %}",
+                "flip": "{% flip %}"
+            }
+        },
+        "test_trace": {
+            "type": "trace",
+            "spec": {
+                "source": "{% address[0] %}",
+                "dest": "{% address[1] %}"
+            }
+        }
+    },
+    "schedules": {
+        "Home_schedule_PT2H": {
+            "repeat": "PT2H",
+            "sliprand": true,
+            "slip": "PT2H"
+        },
+        "Home_schedule_PT10M": {
+            "repeat": "PT10M",
+            "sliprand": true,
+            "slip": "PT10M"
+        }
+    },
+    "tasks": {
+        "MD-PS5-task_throughput": {
+            "group": "Home_group_mesh",
+            "test": "test_throughput",
+            "schedule": "Home_schedule_PT2H",
+            "archives": [ 
+                 "opensearch-archive"
+            ],
+            "_meta": {
+                "display-name": "MD-PS5-All to All-3"
+            }
+        },
+        "MD-PS5-task_rtt": {
+            "group": "Home_group_mesh",
+            "test": "test_rtt",
+            "schedule": "Home_schedule_PT10M",
+            "archives": [ 
+                 "opensearch-archive"
+            ],
+            "_meta": {
+                "display-name": "MD-PS5-All to All-2"
+            }
+        },
+        "MD-PS5-task_latencybg": {
+            "group": "Home_group_mesh",
+            "test": "test_latencybg",
+            "archives": [ 
+                 "opensearch-archive"
+            ],
+            "_meta": {
+                "display-name": "MD-PS5-All to All-1"
+            }
+        },
+        "MD-PS5-task_trace": {
+            "group": "Home_group_mesh",
+            "test": "test_trace",
+            "schedule": "Home_schedule_PT10M",
+            "archives": [ 
+                 "opensearch-archive"
+            ],
+            "_meta": {
+                "display-name": "MD-PS5-All to All-4"
+            }
+        }
+     }
+  }

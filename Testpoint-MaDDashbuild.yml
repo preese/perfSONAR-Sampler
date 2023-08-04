@@ -1,0 +1,153 @@
+---
+- hosts: [testpoint, md-arch]
+  gather_facts: True
+  become: yes
+  tasks:
+    - name: Install epel-release and PS repo
+      yum:
+        name:
+          - epel-release
+          - http://software.internet2.edu/rpms/el7/x86_64/latest/packages/perfsonar-repo-0.11-1.noarch.rpm
+        state: latest
+
+- hosts: [testpoint]
+  gather_facts: False
+  become: yes
+  tasks:
+    - name: Add perfsonar rpms to all testpoint edge nodes
+      yum:
+        name:
+          - perfsonar-testpoint
+          - perfsonar-toolkit-ntp
+          - perfsonar-toolkit-security
+          - perfsonar-toolkit-servicewatcher
+        state: present
+
+    - name: For testpoint VMs, install remote URL and archives, even before the .json is published, the testpoints will be ok
+      command: 'psconfig remote add --configure-archives "https://md.ufixu.com/psconfig/mesh.json"'
+
+    - name: For testpoint VMs, restart psconfig-pscheduler-agent
+      service:
+        name: psconfig-pscheduler-agent
+        state: restarted
+
+- hosts: [md-arch]
+  gather_facts: False
+  become: yes
+  tasks:
+    - name: For maddash VM, add maddash to MaDDash Server
+      yum:
+        name:
+          - perfsonar-archive
+          - perfsonar-psconfig-publisher
+          - maddash
+        state: present
+
+    - name: Allow all IPs on net to access archiver's opensearch tool
+      ansible.builtin.lineinfile:
+        path: /etc/httpd/conf.d/apache-logstash.conf
+        regexp: '^(\s*# Require ip 10\.1\.1\.0/24)$'
+        line: 'Require ip 192.168.0.0/23'
+        backrefs: yes
+
+    - name: Start FW service if not running
+      service:
+        name: firewalld
+        state: started
+
+    - name: Enable FW service
+      service:
+        name: firewalld
+        enabled: yes
+
+    - name: Add http to firewall
+      firewalld:
+        service: http
+        permanent: yes
+        immediate: yes
+        state: enabled
+
+    - name: Add https to firewall
+      firewalld:
+        service: https
+        permanent: yes
+        immediate: yes
+        state: enabled
+
+    - name: Copy mesh.json file to Maddash node from Vagrant host
+      copy:
+        src: ./mesh.json
+        dest: /home/vagrant/mesh.json
+        owner: vagrant
+        group: vagrant
+
+    - name: Publish mesh.json file
+      command: "psconfig publish /home/vagrant/mesh.json"
+
+    - name: Remote add file, lets the archive know where the JSON config file lives
+      command: 'psconfig remote add "https://md.ufixu.com/psconfig/mesh.json"'
+
+    - name: Add new project name for web site
+      ansible.builtin.replace:
+        path: /etc/maddash/maddash-webui/config.json
+        regexp: '"My perfSONAR Dashboard"'
+        replace: '"perfSONAR-Sampler-V5 update"'
+
+    - name: Add correct grid name, so it opens first
+      ansible.builtin.replace:
+        path: /etc/maddash/maddash-webui/config.json
+        regexp: '"My Sites"'
+        replace: '"perfSONAR-Sampler-v5 Grid"'
+
+    - name: Restart psconfig-maddash-agent
+      service:
+        name: psconfig-maddash-agent
+        state: restarted
+
+    - name: Restart httpd
+      service:
+        name: httpd
+        state: restarted
+
+    - name: Shorten test times, packet loss, every 5min
+      command: "psconfig maddash-grid edit --name default_loss --check-interval PT5M"
+
+    - name: Shorten test time, throughput, every 2hr
+      command: "psconfig maddash-grid edit --name default_throughput --check-interval PT2H"
+
+- hosts: [graf]
+  gather_facts: False
+  become: yes
+  tasks:
+    - name: Install Grafana rpm
+      yum:
+        name:
+          - grafana
+          - fontconfig
+          - freetype*
+          - urw-fonts
+          - initscripts
+        state: present
+
+    - name: Enable and start Grafana service
+      service:
+        name: grafana-server
+        enabled: true
+        state: started
+
+    - name: Start FW service if not running
+      service:
+        name: firewalld
+        state: started
+
+    - name: Enable FW service
+      service:
+        name: firewalld
+        enabled: yes
+
+    - name: Add Grafana access port to firewall
+      firewalld:
+        port: 3000/tcp
+        permanent: yes
+        immediate: yes
+        state: enabled
