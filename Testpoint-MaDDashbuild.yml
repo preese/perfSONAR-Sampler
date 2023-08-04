@@ -115,39 +115,6 @@
     - name: Shorten test time, throughput, every 2hr
       command: "psconfig maddash-grid edit --name default_throughput --check-interval PT2H"
 
-- hosts: [graf]
-  gather_facts: False
-  become: yes
-  tasks:
-    - name: Install Grafana rpm
-      yum:
-        name:
-          - grafana
-          - fontconfig
-          - freetype*
-          - urw-fonts
-          - initscripts
-        state: present
-
-    - name: Enable and start Grafana service
-      service:
-        name: grafana-server
-        enabled: true
-        state: started
-
-    - name: Start FW service if not running
-      service:
-        name: firewalld
-        state: started
-
-    - name: Enable FW service
-      service:
-        name: firewalld
-        enabled: yes
-
-    - name: Add Grafana access port to firewall
-      firewalld:
-        port: 3000/tcp
-        permanent: yes
-        immediate: yes
-        state: enabled
+#    - name: Unconditionally reboot the machine with all defaults
+#      ansible.builtin.reboot:
+    
