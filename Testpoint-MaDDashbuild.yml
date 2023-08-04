@@ -24,7 +24,7 @@
         state: present
 
     - name: For testpoint VMs, install remote URL and archives, even before the .json is published, the testpoints will be ok
-      command: 'psconfig remote add --configure-archives "https://md.ufixu.com/psconfig/mesh.json"'
+      command: 'psconfig remote add --configure-archives "https://192.168.1.214/psconfig/mesh.json"'
 
     - name: For testpoint VMs, restart psconfig-pscheduler-agent
       service:
@@ -85,7 +85,7 @@
       command: "psconfig publish /home/vagrant/mesh.json"
 
     - name: Remote add file, lets the archive know where the JSON config file lives
-      command: 'psconfig remote add "https://md.ufixu.com/psconfig/mesh.json"'
+      command: 'psconfig remote add "https://192.168.1.214/psconfig/mesh.json"'
 
     - name: Add new project name for web site
       ansible.builtin.replace:
