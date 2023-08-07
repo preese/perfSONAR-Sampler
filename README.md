@@ -42,7 +42,7 @@ Here is the chart for my systems. You'll need to make one of these using your av
 |ps1|192.168.1.211|52:54:00:73:6f:41|
 |ps2|192.168.1.212|52:54:00:73:6f:42|
 |ps3|192.168.1.213|52:54:00:73:6f:43|
-|md|192.168.1.2134|52:54:00:73:6f:44|
+|md|192.168.1.214|52:54:00:73:6f:44|
 
 If you make changes to the above chart, plan to make similar edits to:
 

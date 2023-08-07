@@ -1,4 +1,5 @@
 ---
+
 - hosts: [testpoint, md-arch]
   gather_facts: True
   become: yes
@@ -35,7 +36,7 @@
   gather_facts: False
   become: yes
   tasks:
-    - name: For maddash VM, add maddash to MaDDash Server
+    - name: For maddash VM, add maddash and archive rpms to MaDDash Server
       yum:
         name:
           - perfsonar-archive
@@ -91,13 +92,13 @@
       ansible.builtin.replace:
         path: /etc/maddash/maddash-webui/config.json
         regexp: '"My perfSONAR Dashboard"'
-        replace: '"perfSONAR-Sampler-V5 update"'
+        replace: '"ps-v5"'
 
     - name: Add correct grid name, so it opens first
       ansible.builtin.replace:
         path: /etc/maddash/maddash-webui/config.json
         regexp: '"My Sites"'
-        replace: '"perfSONAR-Sampler-v5 Grid"'
+        replace: '"ps-v5-grid"'
 
     - name: Restart psconfig-maddash-agent
       service:
@@ -114,7 +115,3 @@
 
     - name: Shorten test time, throughput, every 2hr
       command: "psconfig maddash-grid edit --name default_throughput --check-interval PT2H"
-
-#    - name: Unconditionally reboot the machine with all defaults
-#      ansible.builtin.reboot:
-    
