@@ -35,7 +35,7 @@ Here is the chart for my systems. You'll need to make one of these using your av
 ## Chart for perfSONAR-Sampler
 **Second host interface name:** enp0s20f0u2
 
-**My Address** segment for the IPs in use: 192.168.0.0/23 (yours if probably a /24!)
+**My Address** segment for the IPs in use: 192.168.0.0/23 (yours is probably a /24!)
 
 |Name |IP# |Mac Addr |
 | ---| ---| ---|
