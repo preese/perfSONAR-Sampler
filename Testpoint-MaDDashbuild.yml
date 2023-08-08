@@ -1,44 +1,19 @@
 ---
 
-- hosts: [testpoint, md-arch]
-  gather_facts: True
+- hosts: [md-arch]
+  gather_facts: true
   become: yes
   tasks:
-    - name: Install epel-release and PS repo
+    - name: For maddash VM, add epel and ps Repo
       yum:
         name:
           - epel-release
           - http://software.internet2.edu/rpms/el7/x86_64/latest/packages/perfsonar-repo-0.11-1.noarch.rpm
-        state: latest
+        state: latest   
 
-- hosts: [testpoint]
-  gather_facts: False
-  become: yes
-  tasks:
-    - name: Add perfsonar rpms to all testpoint edge nodes
-      yum:
-        name:
-          - perfsonar-testpoint
-          - perfsonar-toolkit-ntp
-          - perfsonar-toolkit-security
-          - perfsonar-toolkit-servicewatcher
-        state: present
-
-    - name: For testpoint VMs, install remote URL and archives, even before the .json is published, the testpoints will be ok
-      command: 'psconfig remote add --configure-archives "https://192.168.1.214/psconfig/mesh.json"'
-
-    - name: For testpoint VMs, restart psconfig-pscheduler-agent
-      service:
-        name: psconfig-pscheduler-agent
-        state: restarted
-
-- hosts: [md-arch]
-  gather_facts: False
-  become: yes
-  tasks:
     - name: For maddash VM, add maddash and archive rpms to MaDDash Server
       yum:
-        name:
+        name:          
           - perfsonar-archive
           - perfsonar-psconfig-publisher
           - maddash
@@ -115,3 +90,31 @@
 
     - name: Shorten test time, throughput, every 2hr
       command: "psconfig maddash-grid edit --name default_throughput --check-interval PT2H"
+
+- hosts: [testpoint]
+  gather_facts: true
+  become: yes
+  tasks:
+    - name: Add perfsonar rpms for epel and ps Repo
+      yum:
+        name:
+          - epel-release
+          - http://software.internet2.edu/rpms/el7/x86_64/latest/packages/perfsonar-repo-0.11-1.noarch.rpm
+        state: latest
+
+    - name: Add perfsonar rpms to all testpoint edge nodes
+      yum:
+        name:
+          - perfsonar-testpoint
+          - perfsonar-toolkit-ntp
+          - perfsonar-toolkit-security
+          - perfsonar-toolkit-servicewatcher
+        state: present
+  
+    - name: For testpoint VMs, install remote URL and archives
+      command: 'psconfig remote add "https://192.168.1.214/psconfig/mesh.json"'
+
+    - name: For testpoint VMs, restart psconfig-pscheduler-agent
+      service:
+        name: psconfig-pscheduler-agent
+        state: restarted

@@ -2,10 +2,11 @@
 # vi: set ft=ruby :
 
 nodes = [
+  { :hostname => "md", :mac => "525400836f54", :ram => 4096 },
   { :hostname => "ps1", :mac => "525400836f51", :ram => 2048 },
   { :hostname => "ps2", :mac => "525400836f52", :ram => 2048 },
-  { :hostname => "ps3", :mac => "525400836f53", :ram => 2048 },
-  { :hostname => "md", :mac => "525400836f54", :ram => 4096 }
+  { :hostname => "ps3", :mac => "525400836f53", :ram => 2048 }
+
 ]
 
 Vagrant.configure("2") do |config|
